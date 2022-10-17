@@ -1,0 +1,15 @@
+modules:
+  jira:globalPage:
+    - key: hello-world-camila-app-hello-world-page
+      resource: main
+      resolver:
+        function: resolver
+      title: hello-world-camila-app
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/hello-world/build
+app:
+  id: ari:cloud:ecosystem::app/3df49650-31ec-4b22-9122-f43a2aace7a4
