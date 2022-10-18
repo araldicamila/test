@@ -36,6 +36,9 @@ jobs:
     - name: Deploy to staging
       run: npm install
     
+    - name: Sudo
+      run: sudo apt-get install -y libsecret-1-0
+    
     - name: Analytics
       run: forge settings set usage-analytics false
     - name: Install
