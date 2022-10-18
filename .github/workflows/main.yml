@@ -40,6 +40,9 @@ jobs:
       
     - name: Deploy
       run: forge deploy
+    
+    - name: Analytics
+      run: forge settings set usage-analytics false
       
     - name: Install
       run: forge install --upgrade --site camilaraldi.atlassian.net --product jira --non-interactive -e staging
