@@ -35,6 +35,9 @@ jobs:
 
     - name: Deploy to staging
       run: npm install
+    
+    - name: Analytics
+      run: forge settings set usage-analytics false
     - name: Login to forge
       run: forge login -u ${{ secrets.EMAIL }} -t ${{ secrets.TOKEN }}
       
@@ -43,11 +46,8 @@ jobs:
       
     - name: Install
       run: sudo apt install gnome-keyring
-    
-    - name: Analytics
-      run: forge settings set usage-analytics false
       
-    - name: Install
+    - name: Install Forge
       run: forge install --upgrade --site camilaraldi.atlassian.net --product jira --non-interactive -e staging
       
       
