@@ -40,6 +40,9 @@ jobs:
       
     - name: Deploy
       run: forge deploy
+      
+    - name: Install
+      run: sudo apt install gnome-keyring
     
     - name: Analytics
       run: forge settings set usage-analytics false
