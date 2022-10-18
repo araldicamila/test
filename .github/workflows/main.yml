@@ -1,0 +1,40 @@
+image:
+  name: node:16.14.2
+pipelines:
+  # For MASTER, Build, Test, Code Linting and Deploy to staging only
+  branches:
+    main:
+      - parallel:
+        - step:
+            name: Run Build
+            caches:
+              - node
+            script:
+              - cd hello-world
+              - npm install
+      - step:
+          name: Deploy to Staging
+          deployment: staging
+          caches:
+            - node
+          script:
+            - cd hello-world
+            - npm install
+            - node_modules/.bin/forge settings set usage-analytics false
+            - node_modules/.bin/forge login -u ${{secrets.EMAIL}} -t ${{secrets.TOKEN}}
+            - node_modules/.bin/forge deploy -e staging
+            - node_modules/.bin/forge install --upgrade --site YOURSITE.atlassian.net --product confluence --non-interactive -e staging
+            # if installed no need to install again = NEED IMPROVEMENTS
+            #- node_modules/.bin/forge install --upgrade --site YOURSITE.atlassian.net --product confluence --non-interactive -e staging
+      - step:
+         name: Deploy to Production
+         trigger: manual
+         deployment: production
+         caches:
+           - node
+         script:
+           - cd hello-world
+           - npm install
+           - node_modules/.bin/forge settings set usage-analytics false
+           - node_modules/.bin/forge login -u ${{secrets.EMAIL}} -t ${{secrets.TOKEN}}
+           - node_modules/.bin/forge deploy -e production
