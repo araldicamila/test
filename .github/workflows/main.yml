@@ -38,8 +38,14 @@ jobs:
     
     - name: Analytics
       run: forge settings set usage-analytics false
-    - name: Login to forge
-      run: forge login -u ${{ secrets.EMAIL }} -t ${{ secrets.TOKEN }}
+    - name: Read e-mail
+      run: read ${{ secrets.EMAIL }}
+      
+    - name: Read token
+      run: read -s ${{ secrets.TOKEN }}
+      
+    - name: Forge
+      run: export ${{ secrets.EMAIL }} ${{ secrets.TOKEN }}
       
     - name: Deploy
       run: forge deploy
