@@ -21,6 +21,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    
+    - name: Install forge 
+      run: npm install -g @forge/cli
      
     - name: Install dependencies
       working-directory: ./static/hello-world
@@ -33,9 +36,9 @@ jobs:
     - name: Deploy to staging
       run: npm install
     - name: Login to forge
-      run: node_modules/.bin/forge login -u {{ secrets.EMAIL }} -t {{ secrets.TOKEN }}
+      run: forge login -u {{ secrets.EMAIL }} -t {{ secrets.TOKEN }}
       
     - name: Deploy
-      run: node_modules/.bin/forge deploy -e staging
+      run: forge deploy -e staging
       
       
