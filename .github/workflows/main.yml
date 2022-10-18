@@ -7,7 +7,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-12
 
     strategy:
       matrix:
@@ -36,13 +36,8 @@ jobs:
     - name: Deploy to staging
       run: npm install
     
-    - name: Sudo
-      run: sudo apt-get install -y libsecret-1-0
-    
     - name: Analytics
       run: forge settings set usage-analytics false
-    - name: Install
-      run: sudo apt install gnome-keyring
       
     - name: Login to forge
       run: forge login -u ${{ secrets.EMAIL }} -t ${{ secrets.TOKEN }}
