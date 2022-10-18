@@ -1,0 +1,44 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.14.2]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install forge 
+      run: npm install -g @forge/cli
+     
+    - name: Install dependencies
+      working-directory: ./static/hello-world
+      run: npm install
+      
+    - name: Build
+      working-directory: ./static/hello-world
+      run: npm run build
+
+    - name: Deploy to staging
+      run: npm install
+    - name: Login to forge
+      run: forge login -u ${{ secrets.EMAIL }} -t ${{ secrets.TOKEN }}
+      
+    - name: Deploy
+      run: forge deploy -e staging
+      
+      
