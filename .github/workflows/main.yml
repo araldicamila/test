@@ -44,7 +44,7 @@ jobs:
       run: forge login -u ${{ secrets.EMAIL }} -t ${{ secrets.TOKEN }}
       
     - name: Deploy
-      run: forge deploy -e staging
+      run: forge deploy
       
     - name: Install Forge
       run: forge install --upgrade --site camilaraldi.atlassian.net --product jira --non-interactive -e staging
