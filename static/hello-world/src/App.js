@@ -10,7 +10,7 @@ function App() {
 
     return (
         <div>
-           Deu certo o deploy :D
+           Segunda tentativa, com tags;
         </div>
     );
 }
