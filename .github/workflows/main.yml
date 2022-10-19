@@ -2,12 +2,13 @@ name: CI/CD
 
 on:
   push:
-    branches: [ main ]
+    tags: 
+      - '*'
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-12
 
     strategy:
       matrix:
@@ -35,6 +36,10 @@ jobs:
 
     - name: Deploy to staging
       run: npm install
+    
+    - name: Analytics
+      run: forge settings set usage-analytics false
+      
     - name: Login to forge
       run: forge login -u ${{ secrets.EMAIL }} -t ${{ secrets.TOKEN }}
       
