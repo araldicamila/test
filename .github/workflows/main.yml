@@ -47,4 +47,4 @@ jobs:
       run: forge deploy -e staging
       
     - name: Install Forge
-      run: forge install --upgrade
+      run: forge install --upgrade --site camilaraldi.atlassian.net --product jira --non-interactive -e staging
